@@ -34,9 +34,9 @@
         #startButton {
             background-color: yellow;
             color: black;
-            font-size: 24px;
+            font-size: 4vw; /* Ajusta el tamaño a la pantalla */
             font-weight: bold;
-            padding: 20px 40px;
+            padding: 1vw 2vw;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -61,7 +61,8 @@
 
         canvas {
             display: block;
-            margin: auto;
+            margin: 0;
+            padding: 0;
         }
 
         /* Fondo animado */
@@ -105,8 +106,14 @@
         const ctx = canvas.getContext("2d");
         const music = document.getElementById("music");
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Ajustar canvas al tamaño de la ventana
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
 
         const balloons = [];
         const confetti = [];
@@ -232,17 +239,17 @@
         }
 
         function drawText() {
-            ctx.font = "bold 48px 'Comic Sans MS'";
+            ctx.font = "bold 5vw 'Comic Sans MS'";
             ctx.fillStyle = "white";
             ctx.strokeStyle = "black";
             ctx.lineWidth = 4;
             ctx.textAlign = "center";
 
-            ctx.strokeText("¡Feliz Cumpleaños, Adriana!", canvas.width / 2, 100);
-            ctx.fillText("¡Feliz Cumpleaños, Adriana!", canvas.width / 2, 100);
-            ctx.font = "32px 'Comic Sans MS'";
-            ctx.strokeText("19 años de magia 🎉", canvas.width / 2, 150);
-            ctx.fillText("19 años de magia 🎉", canvas.width / 2, 150);
+            ctx.strokeText("¡Feliz Cumpleaños, Adriana!", canvas.width / 2, canvas.height * 0.1);
+            ctx.fillText("¡Feliz Cumpleaños, Adriana!", canvas.width / 2, canvas.height * 0.1);
+            ctx.font = "3vw 'Comic Sans MS'";
+            ctx.strokeText("19 años de magia 🎉", canvas.width / 2, canvas.height * 0.15);
+            ctx.fillText("19 años de magia 🎉", canvas.width / 2, canvas.height * 0.15);
         }
 
         // Agregar evento de clic para generar confeti
