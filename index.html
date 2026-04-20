@@ -1,275 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños Adriana!</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cristian J. | Systems &amp; Security Notes</title>
+  <style>
+    /* ─── Reset ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; }
 
-        #introScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            transition: opacity 2s ease-in-out;
-        }
+    body {
+      background: #f2c8c8;
+      color: #111;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
 
-        #introScreen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+    a { color: #00c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:visited { color: #551a8b; }
 
-        #startButton {
-            background-color: yellow;
-            color: black;
-            font-size: 4vw; /* Ajusta el tamaño a la pantalla */
-            font-weight: bold;
-            padding: 1vw 2vw;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            animation: pulse 1.5s infinite;
-            box-shadow: 0 0 15px yellow;
-        }
+    /* ─── Outer wrapper ─────────────────────────────────────── */
+    #page {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
 
-        #startButton:hover {
-            background-color: gold;
-        }
+    /* ─── LEFT SIDEBAR ──────────────────────────────────────── */
+    #leftnav {
+      width: 210px;
+      min-width: 210px;
+      background: #e8b8b8;
+      padding: 1rem .9rem 3rem;
+      min-height: 100vh;
+      border-right: 1px solid #cca0a0;
+      font-size: .88rem;
+    }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 15px yellow;
-            }
-            50% {
-                transform: scale(1.1);
-                box-shadow: 0 0 30px gold;
-            }
-        }
+    #leftnav .nav-heading {
+      font-weight: bold;
+      font-size: .85rem;
+      color: #444;
+      margin: 1rem 0 .3rem;
+      display: block;
+    }
 
-        canvas {
-            display: block;
-            margin: 0;
-            padding: 0;
-        }
+    #leftnav ul { list-style: none; margin-bottom: .5rem; }
+    #leftnav ul li { padding: 1px 0; }
+    #leftnav ul li a { color: #00c; font-size: .86rem; }
 
-        /* Fondo animado */
-        body {
-            background: linear-gradient(135deg, #f3e6ff, #ffe6f0);
-            animation: backgroundAnimation 10s infinite alternate;
-        }
+    #leftnav .section-title {
+      font-weight: bold;
+      font-size: .78rem;
+      color: #555;
+      margin: 1rem 0 .2rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      display: block;
+    }
 
-        @keyframes backgroundAnimation {
-            0% {
-                background: linear-gradient(135deg, #f3e6ff, #ffe6f0);
-            }
-            50% {
-                background: linear-gradient(135deg, #ffe6e6, #e6f7ff);
-            }
-            100% {
-                background: linear-gradient(135deg, #e6ffe6, #ffe6e6);
-            }
-        }
-    </style>
+    /* ─── MAIN CONTENT ──────────────────────────────────────── */
+    #main {
+      flex: 1;
+      background: #fff;
+      padding: 1.2rem 2rem 3rem;
+      min-height: 100vh;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: .6rem;
+    }
+
+    .site-header h1 {
+      font-size: 1.75rem;
+      font-weight: normal;
+      font-family: Georgia, serif;
+    }
+
+    .site-header nav a {
+      font-size: .88rem;
+      color: #555;
+      margin-right: .7rem;
+    }
+
+    #main h2 {
+      font-size: 1.3rem;
+      font-family: Georgia, serif;
+      font-weight: normal;
+      margin: 1.5rem 0 .8rem;
+      color: #111;
+    }
+
+    /* ── Post date list ── */
+    .post-list { list-style: none; }
+    .post-list li {
+      display: flex;
+      align-items: baseline;
+      gap: .45rem;
+      padding: 2px 0;
+      font-size: .91rem;
+    }
+    .post-list .date {
+      font-family: monospace;
+      font-size: .82rem;
+      color: #666;
+      min-width: 88px;
+      text-align: right;
+    }
+    .post-list .arr { color: #999; }
+
+    /* ── Expanded post summaries ── */
+    .post-summary {
+      border-bottom: 1px solid #eee;
+      padding: .75rem 0 .85rem;
+    }
+    .post-summary h3 { font-size: .98rem; font-weight: bold; margin-bottom: .1rem; }
+    .post-summary .meta {
+      font-family: monospace; font-size: .79rem; color: #888; margin-bottom: .3rem;
+    }
+    .post-summary p { font-size: .89rem; color: #333; line-height: 1.55; margin: 0; }
+
+    /* ── Projects ── */
+    .proj {
+      border-bottom: 1px solid #eee;
+      padding: .65rem 0;
+    }
+    .proj h3 { font-size: .93rem; font-weight: bold; margin-bottom: .1rem; }
+    .proj .tag {
+      display: inline-block;
+      font-family: monospace;
+      font-size: .73rem;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 0 5px;
+      border-radius: 2px;
+      margin-left: .3rem;
+      color: #333;
+      vertical-align: middle;
+    }
+    .proj p { font-size: .87rem; color: #333; margin: .15rem 0 0; }
+
+    /* ── Notes / code ── */
+    pre {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: .78rem;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-left: 3px solid #aaa;
+      padding: .7rem .9rem;
+      overflow-x: auto;
+      line-height: 1.45;
+      margin: .45rem 0 1rem;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: .87em;
+      background: #f0f0f0;
+      padding: 0 3px;
+      border-radius: 2px;
+    }
+    .note-sec { margin-bottom: 1.4rem; }
+    .note-sec h3 {
+      font-size: .93rem;
+      font-weight: bold;
+      margin: .9rem 0 .2rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: .12rem;
+    }
+
+    /* ── About ── */
+    .about-body p { font-size: .91rem; margin-bottom: .65rem; }
+    .about-body ul { margin: .3rem 0 .75rem 1.25rem; font-size: .89rem; }
+    .about-body ul li { padding: 1px 0; }
+
+    /* ─── RIGHT SIDEBAR ─────────────────────────────────────── */
+    #rightnav {
+      width: 195px;
+      min-width: 195px;
+      background: #e8b8b8;
+      padding: 1rem .75rem 3rem;
+      min-height: 100vh;
+      border-left: 1px solid #cca0a0;
+      font-size: .82rem;
+    }
+
+    #rightnav .sb-head {
+      font-weight: bold;
+      font-size: .8rem;
+      color: #444;
+      margin: .2rem 0 .5rem;
+    }
+
+    .book-card {
+      background: #fff;
+      border: 1px solid #c8a0a0;
+      padding: .45rem .5rem;
+      margin-bottom: .9rem;
+      border-radius: 2px;
+    }
+    .book-card .bt {
+      font-weight: bold;
+      font-size: .8rem;
+      color: #00c;
+      display: block;
+      margin-bottom: .15rem;
+    }
+    .book-card .bd { color: #555; font-size: .76rem; line-height: 1.4; }
+    .book-card .bk {
+      display: inline-block;
+      margin-top: .25rem;
+      font-size: .72rem;
+      background: #ece0e0;
+      padding: 0 5px;
+      border-radius: 2px;
+      color: #444;
+    }
+
+    #rightnav .rp {
+      padding: 3px 0;
+      border-bottom: 1px dotted #c8a0a0;
+    }
+    #rightnav .rp .rd {
+      font-family: monospace;
+      font-size: .74rem;
+      color: #777;
+      display: block;
+    }
+    #rightnav .rp a { font-size: .79rem; }
+
+    /* ─── Footer ────────────────────────────────────────────── */
+    #footer {
+      background: #d8a8a8;
+      text-align: center;
+      padding: .55rem;
+      font-size: .77rem;
+      color: #555;
+      font-family: monospace;
+      border-top: 1px solid #c09090;
+    }
+
+    /* ─── Responsive ────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      #page { flex-direction: column; }
+      #leftnav, #rightnav {
+        width: 100%; min-height: unset;
+        border: none; border-bottom: 1px solid #cca0a0;
+      }
+      #main { padding: 1rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Pantalla de inicio -->
-    <div id="introScreen">
-        <button id="startButton">Encender Luces</button>
+
+<div id="page">
+
+  <!-- ══════════════ LEFT SIDEBAR -->
+  <aside id="leftnav">
+    <span class="nav-heading">Cristian's site:</span>
+    <ul>
+      <li><a href="#home">Start Here</a></li>
+      <li><a href="#home">Homepage</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#notes">Notes</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+
+    <span class="section-title">Linux</span>
+    <ul>
+      <li><a href="#notes">CPU &amp; Perf</a></li>
+      <li><a href="#notes">Memory</a></li>
+      <li><a href="#notes">I/O tools</a></li>
+      <li><a href="#notes">eBPF basics</a></li>
+      <li><a href="#notes">Flame graphs</a></li>
+    </ul>
+
+    <span class="section-title">Networking</span>
+    <ul>
+      <li><a href="#notes">TCP/IP</a></li>
+      <li><a href="#notes">tcpdump</a></li>
+      <li><a href="#notes">netstat / ss</a></li>
+      <li><a href="#notes">Routing</a></li>
+    </ul>
+
+    <span class="section-title">Security</span>
+    <ul>
+      <li><a href="#notes">Port scanning</a></li>
+      <li><a href="#notes">Auth logs</a></li>
+      <li><a href="#notes">Hardening</a></li>
+      <li><a href="#notes">CTF notes</a></li>
+    </ul>
+
+    <span class="section-title">Math</span>
+    <ul>
+      <li><a href="#notes">Graph theory</a></li>
+      <li><a href="#notes">Linear algebra</a></li>
+      <li><a href="#notes">Probability</a></li>
+    </ul>
+
+    <span class="section-title">Resources</span>
+    <ul>
+      <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+      <li><a href="https://man7.org/linux/man-pages/" target="_blank">Linux man-pages</a></li>
+      <li><a href="https://tools.ietf.org/html/rfc793" target="_blank">RFC 793 (TCP)</a></li>
+      <li><a href="https://www.wireshark.org/" target="_blank">Wireshark</a></li>
+      <li><a href="https://overthewire.org/wargames/" target="_blank">OverTheWire</a></li>
+    </ul>
+  </aside>
+
+  <!-- ══════════════ MAIN CONTENT -->
+  <main id="main">
+
+    <div class="site-header">
+      <h1>Cristian J.'s Blog</h1>
+      <nav>
+        <a href="#home">home</a>
+        <a href="#blog">blog</a>
+        <a href="#projects">projects</a>
+        <a href="#notes">notes</a>
+        <a href="#about">about</a>
+      </nav>
     </div>
 
-    <!-- Canvas para la animación -->
-    <canvas id="birthdayCanvas"></canvas>
+    <!-- HOME -->
+    <section id="home">
+      <p style="font-size:.91rem;color:#333;">
+        Notes on Linux internals, networking, cybersecurity, and applied mathematics.
+        Technical, direct — primarily a personal reference.
+      </p>
+    </section>
 
-    <!-- Música -->
-    <audio id="music" loop>
-        <source src="morat.mp3" type="audio/mp3">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
+    <!-- BLOG -->
+    <section id="blog">
+      <h2>Blog Posts</h2>
 
-    <script>
-        const introScreen = document.getElementById("introScreen");
-        const startButton = document.getElementById("startButton");
-        const canvas = document.getElementById("birthdayCanvas");
-        const ctx = canvas.getContext("2d");
-        const music = document.getElementById("music");
+      <ul class="post-list">
+        <li><span class="date">10 Apr 2025</span><span class="arr">»</span><a href="#post1">Visualizing CPU Usage in Linux</a></li>
+        <li><span class="date">22 Mar 2025</span><span class="arr">»</span><a href="#post2">How TCP Connections Really Work</a></li>
+        <li><span class="date">14 Feb 2025</span><span class="arr">»</span><a href="#post3">Using Linear Algebra in Network Analysis</a></li>
+        <li><span class="date">30 Jan 2025</span><span class="arr">»</span><a href="#">eBPF: Tracing System Calls Without Overhead</a></li>
+        <li><span class="date">05 Dec 2024</span><span class="arr">»</span><a href="#">SSH Brute-Force Detection with Pure Bash</a></li>
+        <li><span class="date">18 Nov 2024</span><span class="arr">»</span><a href="#">Dijkstra from Scratch in C++</a></li>
+      </ul>
 
-        // Ajustar canvas al tamaño de la ventana
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+      <br/>
 
-        window.addEventListener("resize", resizeCanvas);
-        resizeCanvas();
+      <div id="post1" class="post-summary">
+        <h3><a href="#">Visualizing CPU Usage in Linux</a></h3>
+        <div class="meta">2025-04-10</div>
+        <p>A walkthrough of <code>top</code>, <code>perf</code>, and <code>/proc/stat</code>
+        to understand how the kernel accounts for CPU time. Includes per-core analysis
+        and a flame graph example generated from a real C++ workload.</p>
+      </div>
 
-        const balloons = [];
-        const confetti = [];
-        const maxBalloons = 15;
-        const maxConfetti = 100;
+      <div id="post2" class="post-summary">
+        <h3><a href="#">How TCP Connections Really Work</a></h3>
+        <div class="meta">2025-03-22</div>
+        <p>Walking through the three-way handshake, sequence numbers, window scaling, and
+        TIME_WAIT state with <code>tcpdump</code> captures. ASCII diagrams included.
+        Useful for debugging latency anomalies and mysterious connection drops.</p>
+      </div>
 
-        // Ocultar pantalla inicial y comenzar animación
-        startButton.addEventListener("click", () => {
-            // Reproducir música
-            music.play().catch(console.error);
+      <div id="post3" class="post-summary">
+        <h3><a href="#">Using Linear Algebra in Network Analysis</a></h3>
+        <div class="meta">2025-02-14</div>
+        <p>Applying adjacency matrices, eigenvector centrality, and graph Laplacians
+        to model network topologies. Python + NumPy examples included. Good foundation
+        for understanding BGP convergence and routing algorithm design.</p>
+      </div>
+    </section>
 
-            // Animar ocultar pantalla negra
-            introScreen.classList.add("hidden");
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Projects</h2>
 
-            // Comenzar la animación
-            animate();
-        });
+      <div class="proj">
+        <h3><a href="#">portscanner.py</a><span class="tag">Python</span></h3>
+        <p>Concurrent TCP port scanner using <code>asyncio</code>. Supports CIDR ranges,
+        banner grabbing, and CSV output. Built to understand raw socket programming
+        without relying on Nmap.</p>
+      </div>
 
-        // Globos y confeti
-        function createBalloon() {
-            if (balloons.length < maxBalloons) {
-                balloons.push({
-                    x: Math.random() * canvas.width,
-                    y: canvas.height + 50,
-                    size: Math.random() * 50 + 30,
-                    color: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.8)`,
-                    speed: Math.random() * 2 + 1,
-                    oscillation: Math.random() * 50,
-                    angle: Math.random() * Math.PI * 2
-                });
-            }
-        }
+      <div class="proj">
+        <h3><a href="#">netprobe</a><span class="tag">C++</span></h3>
+        <p>Raw socket ICMP/UDP prober measuring RTT and packet loss per hop.
+        Implements a simplified <code>traceroute</code> using <code>IPPROTO_RAW</code>.
+        Outputs structured JSON for post-analysis.</p>
+      </div>
 
-        function drawBalloons() {
-            balloons.forEach((balloon, index) => {
-                ctx.beginPath();
-                ctx.arc(
-                    balloon.x + Math.sin(balloon.angle) * balloon.oscillation,
-                    balloon.y,
-                    balloon.size,
-                    0,
-                    Math.PI * 2
-                );
-                ctx.fillStyle = balloon.color;
-                ctx.fill();
+      <div class="proj">
+        <h3><a href="#">logwatch.sh</a><span class="tag">Bash</span></h3>
+        <p>Tail-based log analyzer for <code>/var/log/auth.log</code>. Detects SSH
+        brute-force patterns, geo-locates IPs, fires webhook alerts. Runs as a systemd service.</p>
+      </div>
 
-                balloon.y -= balloon.speed;
-                balloon.angle += 0.05;
+      <div class="proj">
+        <h3><a href="#">matrix-graph</a><span class="tag">Python</span></h3>
+        <p>Converts network topology JSON to adjacency matrices, computes shortest paths
+        with Dijkstra, and visualizes the Laplacian spectrum. Teaching tool for graph-theoretic
+        network concepts.</p>
+      </div>
 
-                if (balloon.y + balloon.size < 0) {
-                    balloons.splice(index, 1);
-                }
-            });
-        }
+      <div class="proj">
+        <h3><a href="#">ctf-toolkit</a><span class="tag">Python</span><span class="tag">C</span></h3>
+        <p>CTF helper scripts: format string exploits, ROP chain helpers, entropy analysis,
+        binary diffing. Organized by challenge category.</p>
+      </div>
+    </section>
 
-        // Confeti
-        function createConfetti(x, y) {
-            for (let i = 0; i < 30; i++) {
-                confetti.push({
-                    x: x,
-                    y: y,
-                    size: Math.random() * 10 + 5,
-                    color: ["red", "blue", "yellow", "green", "purple"][Math.floor(Math.random() * 5)],
-                    velocityX: Math.random() * 6 - 3,
-                    velocityY: Math.random() * 6 - 3,
-                    rotation: Math.random() * 360
-                });
-            }
-        }
+    <!-- NOTES -->
+    <section id="notes">
+      <h2>Notes</h2>
 
-        function drawConfetti() {
-            confetti.forEach((particle, index) => {
-                ctx.save();
-                ctx.translate(particle.x, particle.y);
-                ctx.rotate((particle.rotation * Math.PI) / 180);
-                ctx.fillStyle = particle.color;
-                ctx.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size);
-                ctx.restore();
+      <div class="note-sec">
+        <h3>Linux — CPU &amp; process monitoring</h3>
+<pre>
+# Real-time process overview
+top -d 1
 
-                particle.x += particle.velocityX;
-                particle.y += particle.velocityY;
-                particle.rotation += Math.random() * 10;
+# Per-CPU usage breakdown
+mpstat -P ALL 1 5
 
-                if (particle.y > canvas.height || particle.size < 1) {
-                    confetti.splice(index, 1);
-                }
-            });
-        }
+# Top CPU consumers
+ps aux --sort=-%cpu | head -15
 
-        // Pastel y texto
-        function drawCake() {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2 + 100;
+# Kernel-level CPU profile
+perf top -a -g
 
-            // Base del pastel
-            drawRectangle("pink", centerX - 120, centerY, 240, 60, "darkred");
-            drawRectangle("lightyellow", centerX - 100, centerY - 60, 200, 60, "gold");
-            drawRectangle("lightblue", centerX - 80, centerY - 120, 160, 60, "darkblue");
+# Scheduler statistics
+cat /proc/schedstat
 
-            // Velas
-            for (let i = -40; i <= 40; i += 20) {
-                drawRectangle("yellow", centerX + i, centerY - 140, 10, 40);
-                drawCircle("orange", centerX + i + 5, centerY - 150, 8);
-            }
-        }
+# I/O wait per process
+iotop -o</pre>
+      </div>
 
-        function drawRectangle(color, x, y, width, height, borderColor) {
-            ctx.fillStyle = color;
-            ctx.fillRect(x, y, width, height);
+      <div class="note-sec">
+        <h3>Networking — capture &amp; diagnose</h3>
+<pre>
+# Capture TCP SYN packets on eth0
+tcpdump -i eth0 'tcp[tcpflags] & tcp-syn != 0'
 
-            if (borderColor) {
-                ctx.strokeStyle = borderColor;
-                ctx.lineWidth = 3;
-                ctx.strokeRect(x, y, width, height);
-            }
-        }
+# Capture HTTP traffic (plain text)
+tcpdump -i any -A 'tcp port 80'
 
-        function drawCircle(color, x, y, radius) {
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fillStyle = color;
-            ctx.fill();
-        }
+# Active connections + PIDs
+ss -tulnp
 
-        function drawText() {
-            ctx.font = "bold 5vw 'Comic Sans MS'";
-            ctx.fillStyle = "white";
-            ctx.strokeStyle = "black";
-            ctx.lineWidth = 4;
-            ctx.textAlign = "center";
+# Legacy alternative
+netstat -tulnp
 
-            ctx.strokeText("¡Feliz Cumpleaños, Adriana!", canvas.width / 2, canvas.height * 0.1);
-            ctx.fillText("¡Feliz Cumpleaños, Adriana!", canvas.width / 2, canvas.height * 0.1);
-            ctx.font = "3vw 'Comic Sans MS'";
-            ctx.strokeText("19 años de magia 🎉", canvas.width / 2, canvas.height * 0.15);
-            ctx.fillText("19 años de magia 🎉", canvas.width / 2, canvas.height * 0.15);
-        }
+# Routing table
+ip route show
 
-        // Agregar evento de clic para generar confeti
-        canvas.addEventListener("click", (event) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-            createConfetti(x, y);
-        });
+# Trace path (no DNS resolution)
+traceroute -n 8.8.8.8
 
-        // Animación principal
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawText();
-            drawCake();
-            drawBalloons();
-            drawConfetti();
-            createBalloon();
-            requestAnimationFrame(animate);
-        }
-    </script>
+# Test TCP port without Telnet
+nc -zv 192.168.1.1 443</pre>
+      </div>
+
+      <div class="note-sec">
+        <h3>TCP three-way handshake &amp; teardown (ASCII)</h3>
+<pre>
+  CLIENT                              SERVER
+    |                                   |
+    |  ------  SYN  (seq=x)  ------->  |   [SYN_SENT]
+    |                                   |   [SYN_RCVD]
+    |  <-- SYN-ACK (seq=y, ack=x+1) -- |
+    |                                   |
+    |  ------  ACK  (ack=y+1)  ----->  |   [ESTABLISHED]
+    |                                   |   [ESTABLISHED]
+    |  ========= DATA FLOW ==========> |
+    |  <========= DATA FLOW ==========  |
+    |                                   |
+    |  ------  FIN  ----------------->  |   [FIN_WAIT_1]
+    |  <-----  ACK  ------------------  |   [CLOSE_WAIT]
+    |  <-----  FIN  ------------------  |   [LAST_ACK]
+    |  ------  ACK  ----------------->  |   [TIME_WAIT]
+    |                                   |   [CLOSED]
+    | (waits 2×MSL, then CLOSED)        |</pre>
+      </div>
+
+      <div class="note-sec">
+        <h3>Security — quick reference</h3>
+<pre>
+# Open ports and owning process
+ss -tulnp | grep LISTEN
+
+# Firewall rules (iptables)
+iptables -L -n -v --line-numbers
+
+# Find SUID binaries (priv-esc surface)
+find / -perm -4000 -type f 2>/dev/null
+
+# Watch failed SSH logins live
+tail -f /var/log/auth.log | grep 'Failed password'
+
+# Integrity check
+sha256sum /path/to/binary
+
+# Network connections by process
+lsof -i -n -P</pre>
+      </div>
+
+      <div class="note-sec">
+        <h3>Applied math — graph Laplacian (Python / NumPy)</h3>
+<pre>
+import numpy as np
+
+# Adjacency matrix: graph  0 -- 1 -- 2
+A = np.array([[0,1,0],
+              [1,0,1],
+              [0,1,0]])
+
+D = np.diag(A.sum(axis=1))   # degree matrix
+L = D - A                    # graph Laplacian
+
+vals = np.linalg.eigvalsh(L)
+print(vals)
+# → [~0.   1.586   2.414]
+# Fiedler value (2nd) ≈ 1.586 → well-connected graph
+
+# Eigenvector centrality via dominant eigenvector
+evals, evecs = np.linalg.eig(A.T)
+pr = np.abs(evecs[:, np.argmax(evals)])
+print(pr / pr.sum())   # normalized scores per node</pre>
+      </div>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+      <div class="about-body">
+        <p>I'm Cristian J., a student of scientific computing focused on systems
+        programming, cybersecurity, and applied mathematics. This site collects
+        technical notes, experiments, and small tools — primarily a personal
+        reference, published in case it's useful to others.</p>
+        <p>Current interests:</p>
+        <ul>
+          <li>Network security and protocol analysis</li>
+          <li>Linux internals — scheduler, memory management, I/O subsystems</li>
+          <li>Graph theory and linear algebra applied to network modeling</li>
+          <li>Low-level programming in C and C++</li>
+          <li>CTF challenges (binary exploitation, web, crypto)</li>
+          <li>eBPF for observability and tracing</li>
+        </ul>
+        <p>Contact: <a href="mailto:cristian@example.com">cristian@example.com</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════ RIGHT SIDEBAR -->
+  <aside id="rightnav">
+
+    <div class="sb-head">Reading list:</div>
+
+    <div class="book-card">
+      <span class="bt">Systems Performance</span>
+      <span class="bd">Brendan Gregg — enterprise and cloud. Essential for Linux internals.</span>
+      <span class="bk">linux · perf</span>
+    </div>
+
+    <div class="book-card">
+      <span class="bt">Computer Networks</span>
+      <span class="bd">Tanenbaum &amp; Wetherall — TCP/IP, routing, and protocol design.</span>
+      <span class="bk">networking</span>
+    </div>
+
+    <div class="book-card">
+      <span class="bt">The Art of Exploitation</span>
+      <span class="bd">Erickson — buffer overflows, shellcode, format strings. Hands-on.</span>
+      <span class="bk">security · C</span>
+    </div>
+
+    <div class="book-card">
+      <span class="bt">Linear Algebra Done Right</span>
+      <span class="bd">Axler — clean, proof-based. Good for spectral methods.</span>
+      <span class="bk">math</span>
+    </div>
+
+    <br/>
+    <div class="sb-head">Recent posts:</div>
+
+    <div class="rp">
+      <span class="rd">10 Apr 2025 »</span>
+      <a href="#post1">Visualizing CPU Usage in Linux</a>
+    </div>
+    <div class="rp">
+      <span class="rd">22 Mar 2025 »</span>
+      <a href="#post2">How TCP Connections Really Work</a>
+    </div>
+    <div class="rp">
+      <span class="rd">14 Feb 2025 »</span>
+      <a href="#post3">Linear Algebra in Networks</a>
+    </div>
+    <div class="rp">
+      <span class="rd">30 Jan 2025 »</span>
+      <a href="#">eBPF: Tracing Syscalls</a>
+    </div>
+    <div class="rp">
+      <span class="rd">05 Dec 2024 »</span>
+      <a href="#">SSH Brute-Force Detection</a>
+    </div>
+
+  </aside>
+
+</div><!-- /#page -->
+
+<div id="footer">
+  Built with GitHub Pages &mdash; 2025 &mdash; Cristian J. &mdash; Systems &amp; Security Notes
+</div>
+
 </body>
 </html>
