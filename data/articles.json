@@ -1,0 +1,36 @@
+[
+  {
+    "id": "espacios-metricos",
+    "title": "Introducción a los espacios métricos",
+    "description": "Conceptos fundamentales de los espacios métricos, propiedades de una métrica, ejemplo en los números reales e implementación en Python.",
+    "category": "Matemáticas",
+    "date": "2026-11-23",
+    "author": "Cristian Bernal",
+    "readingTime": 8,
+    "cover": "",
+    "path": "articulos/matematicas/espacios-metricos.md",
+    "tags": [
+      "Análisis matemático",
+      "Matemáticas",
+      "Python"
+    ]
+  },
+  {
+    "id": "del-texto-al-contexto",
+    "title": "Del texto al contexto: la matemática detrás de RAG",
+    "description": "Word2Vec, DPR, HNSW y RAG explicados desde sus fundamentos matemáticos, con ejemplos numéricos paso a paso.",
+    "category": "Inteligencia Artificial",
+    "date": "2026-11-23",
+    "author": "Cristian Bernal",
+    "readingTime": 20,
+    "cover": "",
+    "path": "articulos/inteligencia-artificial/del-texto-al-contexto.md",
+    "tags": [
+      "RAG",
+      "NLP",
+      "Embeddings",
+      "Recuperación de información",
+      "Matemáticas"
+    ]
+  }
+]

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Artículos | Cristian J.</title>
+  <meta name="description"
+    content="Catálogo de artículos técnicos y científicos sobre matemáticas, machine learning, inteligencia artificial y computación científica.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/articles.css">
+</head>
+
+<body class="page-articles">
+
+  <header id="top">
+    <a class="brand" href="../index.html"><i>C</i>cristianj</a>
+    <nav aria-label="Navegación principal">
+      <a href="../index.html">Blog</a>
+      <a href="index.html" class="on" aria-current="page">Artículos</a>
+      <a href="../index.html#/sobre-mi">Sobre mí</a>
+    </nav>
+    <span class="sp"></span>
+    <label id="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </svg>
+      <input id="article-search" type="search" placeholder="Buscar artículos o etiquetas (Ctrl+K)"
+        aria-label="Buscar artículos por título, descripción o etiquetas">
+    </label>
+    <a class="ibtn" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z" />
+      </svg>
+    </a>
+    <button class="ibtn" id="theme" aria-label="Cambiar tema">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+      </svg>
+    </button>
+  </header>
+
+  <div class="catalog-shell">
+    <main class="catalog-main">
+      <nav class="crumbs" aria-label="Ruta de navegación">
+        <a href="../index.html" aria-label="Inicio">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3 2 12h3v9h5v-6h4v6h5v-9h3z" />
+          </svg>
+        </a>
+        <span>›</span>
+        <span class="cur">Artículos</span>
+      </nav>
+
+      <section class="catalog-hero">
+        <h1>Artículos Técnicos y Científicos</h1>
+        <p class="catalog-lead">
+          Publicaciones en profundidad sobre matemáticas, machine learning, inteligencia artificial, computación
+          científica y programación. Redactadas en Markdown con soporte para notación matemática y código reproducible.
+        </p>
+      </section>
+
+      <section class="catalog-controls" aria-label="Filtros y ordenamiento">
+        <div class="category-bar" id="category-filters" role="group" aria-label="Filtrar por categoría"></div>
+
+        <div class="controls-meta">
+          <div class="active-filters" id="active-filters"></div>
+          <div class="sort-wrap">
+            <span id="results-count" class="results-count"></span>
+            <label for="sort-select" class="sr-only">Ordenar por fecha</label>
+            <select id="sort-select" class="sort-select" aria-label="Ordenar artículos">
+              <option value="desc">Más recientes</option>
+              <option value="asc">Más antiguos</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section aria-live="polite">
+        <div id="catalog-loading" class="state-box">
+          <p>Cargando publicaciones…</p>
+        </div>
+
+        <div id="articles-grid" class="articles-grid" hidden></div>
+
+        <div id="empty-state" class="state-box" hidden>
+          <h2>No se encontraron artículos</h2>
+          <p>Prueba cambiando los términos de búsqueda o seleccionando otra categoría.</p>
+          <button type="button" id="clear-filters" class="btn-secondary">Restablecer filtros</button>
+        </div>
+
+        <div id="error-state" class="state-box state-error" hidden>
+          <h2>No se pudo cargar el catálogo</h2>
+          <p id="error-message">Ocurrió un problema al leer <code>data/articles.json</code>.</p>
+        </div>
+      </section>
+
+      <div id="foot">Publicado con GitHub Pages · Cristian J.</div>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/articles.js"></script>
+</body>
+
+</html>

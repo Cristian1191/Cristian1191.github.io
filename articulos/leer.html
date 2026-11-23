@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lector de artículos | Cristian J.</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/articles.css">
+</head>
+
+<body class="page-reader">
+
+  <div id="reading-progress" aria-hidden="true"></div>
+
+  <header id="top">
+    <a class="brand" href="../index.html"><i>C</i>cristianj</a>
+    <nav aria-label="Navegación principal">
+      <a href="../index.html">Blog</a>
+      <a href="index.html" class="on">Artículos</a>
+      <a href="../index.html#/sobre-mi">Sobre mí</a>
+    </nav>
+    <span class="sp"></span>
+    <a class="btn-top-back" href="index.html">← Catálogo</a>
+    <a class="ibtn" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z" />
+      </svg>
+    </a>
+    <button class="ibtn" id="theme" aria-label="Cambiar tema">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+      </svg>
+    </button>
+  </header>
+
+  <div class="reader-shell">
+    <main class="reader-main">
+      <nav class="crumbs" id="reader-crumbs" aria-label="Ruta de navegación">
+        <a href="../index.html" aria-label="Inicio">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3 2 12h3v9h5v-6h4v6h5v-9h3z" />
+          </svg>
+        </a>
+        <span>›</span>
+        <a href="index.html">Artículos</a>
+      </nav>
+
+      <div id="reader-loading" class="state-box">
+        <p>Cargando artículo…</p>
+      </div>
+
+      <section id="reader-error" class="state-box state-error" hidden>
+        <h1 id="reader-error-title">Artículo no encontrado</h1>
+        <p id="reader-error-desc">No se pudo localizar la publicación solicitada.</p>
+        <a class="btn-secondary" href="index.html">Volver al catálogo de artículos</a>
+      </section>
+
+      <article id="reader-article" hidden>
+        <header class="article-header">
+          <div class="article-meta-top">
+            <a id="article-category" class="badge-category" href="index.html"></a>
+            <span class="meta-sep">·</span>
+            <time id="article-date"></time>
+            <span class="meta-sep">·</span>
+            <span id="article-reading-time"></span>
+          </div>
+
+          <h1 id="article-title" class="article-title"></h1>
+          <p id="article-description" class="article-description"></p>
+
+          <div class="article-meta-bottom">
+            <span id="article-author" class="article-author"></span>
+            <div id="article-tags" class="tag-list"></div>
+          </div>
+
+          <figure id="article-cover-wrap" class="article-cover" hidden>
+            <img id="article-cover" alt="" loading="eager">
+          </figure>
+        </header>
+
+        <details id="mobile-toc" class="mobile-toc" hidden>
+          <summary>Índice de contenidos</summary>
+          <nav id="mobile-toc-list" aria-label="Índice de contenidos"></nav>
+        </details>
+
+        <div id="article-content" class="prose article-prose"></div>
+
+        <footer class="article-footer">
+          <div class="article-nav-bar">
+            <a class="btn-secondary" href="index.html">← Volver al catálogo</a>
+            <a class="btn-ghost" href="#top">↑ Subir al inicio</a>
+          </div>
+
+          <section id="related-section" class="related-section" hidden>
+            <h2>Artículos relacionados</h2>
+            <div id="related-grid" class="related-grid"></div>
+          </section>
+        </footer>
+      </article>
+
+      <div id="foot">Publicado con GitHub Pages · Cristian J.</div>
+    </main>
+
+    <aside id="reader-toc-aside" aria-label="Índice del artículo">
+      <div class="card" id="reader-toc-card" hidden>
+        <h4>Índice</h4>
+        <nav id="reader-toc-items"></nav>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Configuración de MathJax (se ejecuta tras insertar el Markdown en el DOM) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        ignoreHtmlClass: 'mermaid'
+      },
+      chtml: {
+        displayAlign: 'center',
+        matchFontHeight: true
+      },
+      startup: {
+        typeset: false
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/article-reader.js"></script>
+</body>
+
+</html>
